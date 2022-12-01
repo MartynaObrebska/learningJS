@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    * {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Saira Condensed', sans-serif;
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input {
+      padding: 6px 10px;
+      margin: 8px 6px;
+    }
+
+    input.search {
+      width: 100%;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    ul {
+      margin: 10px;
+      width: 100%;
+    }
+
+    form {
+      width: 100%;
+      text-align: center;
+    }
+    
+    input.add {
+      width: 30%;
+    }
+
+    button.add {
+      margin: 8px 0;
+      width: 31px;
+      height: 31px;
+      background-color: teal;
+      color: white;
+      border: none;
+      border-radius: 50%;
+    }
+
+    div {
+      position: absolute;
+      bottom: 30px;
+      width: 80%;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    span {
+      font-weight: 600;
+    }
+
+
+
+  </style>
+</head>
+<body>
+<h1>To-Do List</h1>
+  <input type="text" placeholder="Search..." class="search">
+<section class="tasks">
+  <h2>Tasks:</h2>
+  <ul></ul>
+  <form action="" class="add">
+    <input type="text" placeholder="Add new task..."class="add">
+    <button class="add">+</button>
+  </form>
+</section>
+<div>Tasks count: <span>0</span></div>
+ <script src="main.js"></script> 
+</body>
+</html>
