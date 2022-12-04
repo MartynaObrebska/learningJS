@@ -57,14 +57,18 @@
       width: 30%;
     }
 
-    button.add {
-      margin: 8px 0;
-      width: 31px;
-      height: 31px;
+    button {
+      margin: 5px 0;
+      padding: 6px 8px;
       background-color: teal;
       color: white;
       border: none;
-      border-radius: 50%;
+      border-radius: 20px;
+    }
+
+    button.add {
+      width: 31px;
+      height: 31px;
     }
 
     div {
@@ -79,22 +83,20 @@
       font-weight: 600;
     }
 
-
-
   </style>
 </head>
 <body>
 <h1>To-Do List</h1>
-  <input type="text" placeholder="Search..." class="search">
+  <input type="text" class="search" placeholder='Search...'>
 <section class="tasks">
   <h2>Tasks:</h2>
-  <ul></ul>
   <form action="" class="add">
-    <input type="text" placeholder="Add new task..."class="add">
+    <input type="text" placeholder="Add new task..." class="add">
     <button class="add">+</button>
   </form>
+  <ul></ul>
 </section>
-<div>Tasks count: <span>0</span></div>
+<div>Tasks count: <span class="number">0</span></div>
  <script src="main.js"></script> 
 </body>
 </html>
