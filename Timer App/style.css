@@ -10,13 +10,15 @@ body {
 }
 
 h1,
-h2 {
+h2,
+section,
+div,
+li.split {
   text-align: center;
 }
 
 section {
   margin-top: 50px;
-  text-align: center;
 }
 
 button {
@@ -36,11 +38,9 @@ button.reset {
 
 div {
   margin: 70px 0;
-  text-align: center;
   font-size: 40px;
 }
 
 li.split {
-  text-align: center;
   font-size: 24px;
 }

@@ -3,10 +3,32 @@ const stopBtn = document.querySelector("#stop");
 const time = document.querySelector("#time");
 const ul = document.querySelector("#splits");
 const splits = document.getElementsByClassName("split");
-let seconds = 0;
+let miliseconds = 0;
 let startActive = true;
 let stopActive = true;
-let id;
+let intervalId;
+
+// Button START functions
+
+const btnStopReset = () => {
+  stopActive = !stopActive;
+  stopBtn.textContent = "STOP";
+  stopBtn.className = "";
+};
+
+const startCounting = () => {
+  intervalId = setInterval(counter, 10);
+  startActive = !startActive;
+  startBtn.textContent = "SPLIT";
+  if (!stopActive) {
+    btnStopReset();
+  }
+};
+
+const counter = () => {
+  miliseconds++;
+  time.textContent = (miliseconds / 100).toFixed(2);
+};
 
 const createSplit = () => {
   const split = document.createElement("li");
@@ -15,45 +37,43 @@ const createSplit = () => {
   ul.appendChild(split);
 };
 
-const counter = () => {
-  seconds++;
-  time.textContent = (seconds / 100).toFixed(2);
-};
-
-const start = () => {
+const btnStartClickHandler = () => {
   if (startActive) {
-    id = setInterval(counter, 10);
-    startActive = !startActive;
-    startBtn.textContent = "SPLIT";
-    if (!stopActive) {
-      stopActive = !stopActive;
-      stopBtn.textContent = "STOP";
-      stopBtn.className = "";
-    }
+    startCounting();
   } else {
     createSplit();
   }
 };
 
-const stop = () => {
+// Button STOP functions
+
+const reset = () => {
+  startActive = true;
+  stopActive = true;
+  time.textContent = "---";
+  miliseconds = 0;
+  stopBtn.textContent = "STOP";
+  stopBtn.className = "";
+  [...splits].forEach((item) => item.remove());
+};
+
+const stopCounting = () => {
+  clearInterval(intervalId);
+  stopActive = !stopActive;
+  stopBtn.textContent = "RESET";
+  stopBtn.className = "reset";
+  startActive = !startActive;
+  createSplit();
+};
+
+const btnStopClickHandler = () => {
+  startBtn.textContent = "START";
   if (stopActive & !startActive) {
-    clearInterval(id);
-    stopActive = !stopActive;
-    stopBtn.textContent = "RESET";
-    stopBtn.className = "reset";
-    startActive = !startActive;
-    createSplit();
-    startBtn.textContent = "START";
+    stopCounting();
   } else {
-    startActive = true;
-    stopActive = true;
-    time.textContent = "---";
-    seconds = 0;
-    stopBtn.textContent = "STOP";
-    stopBtn.className = "";
-    startBtn.textContent = "START";
-    [...splits].forEach((item) => item.remove());
+    reset();
   }
 };
-startBtn.addEventListener("click", start);
-stopBtn.addEventListener("click", stop);
+
+startBtn.addEventListener("click", btnStartClickHandler);
+stopBtn.addEventListener("click", btnStopClickHandler);
