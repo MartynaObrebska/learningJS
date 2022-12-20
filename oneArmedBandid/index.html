@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE ARMED BANDID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrap">
+        <h1>One armed bandid</h1>
+        <div class="rules">Rules: Set the bet, spin and win! 3 x the same color => 3 x bet, 3 x different colors => 5 x bet.
+        </div>
+        <section id="colors">
+            <div class="color"></div>
+            <div class="color"></div>
+            <div class="color"></div>
+        </section>
+        <div id="result">Start the game!</div>
+        <section id="game">
+            <input id="bet" type="number" placeholder="Set your bet">
+            <button id="spin">Spin</button>
+        </section>
+        <section id="wallet">
+            <div class="wallet">Cash: <span id="cash">0</span>$</div>
+            <div class="wallet">Win: <span id="win">0</span>$</div>
+        </section>
+        <section id="statistics">
+            <h2>Statistics:</h2>
+            <div class="stat">Total games: <span id="total">0</span></div>
+            <div class="stat">Wins: <span id="wins">0</span></div>
+            <div class="stat">Losses: <span id="losses">0</span></div>
+        </section>
+    </div>
+    <script src="Wallet.js"></script>
+    <script src="Draw.js"></script>
+    <script src="Statistics.js"></script>
+    <script src="Game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
