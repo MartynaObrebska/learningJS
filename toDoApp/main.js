@@ -4,7 +4,7 @@
   const addInput = document.querySelector("#add-task-input");
   const ul = document.querySelector("ul");
   const taskList = document.getElementsByClassName("task");
-  const tasksNumber = document.querySelector("span");
+  const tasksNumber = document.querySelector("#tasksNumber");
 
   const removeTask = (e) => {
     e.target.parentNode.remove();
