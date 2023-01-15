@@ -2,15 +2,29 @@ class Baner {
   constructor(container) {
     this.container = container;
     this.activeElementIndex = 0;
-    this.childrenContainer = {
-      imgColor: document.createElement("img"),
-      imgGray: document.createElement("img"),
-      div: document.createElement("div"),
-    };
-    this.containerClasses = ["color", "gray", "member"];
-    this.memberContainer = {
-      name: document.createElement("h1"),
-      profession: document.createElement("h2"),
+    this.elements = {
+      imgColor: {
+        element: document.createElement("img"),
+        image: true,
+        class: "color",
+      },
+      imgGray: {
+        element: document.createElement("img"),
+        image: true,
+        class: "gray",
+      },
+      div: {
+        element: document.createElement("div"),
+        class: "member",
+      },
+      name: {
+        element: document.createElement("h1"),
+        nested: true,
+      },
+      profession: {
+        element: document.createElement("h2"),
+        nested: true,
+      },
     };
     this.iterableContent = {
       imgColor: ["img/s1.png", "img/s2.png", "img/s3.png"],
@@ -29,26 +43,27 @@ class Baner {
     }, 6000);
   }
   createBanerContent() {
-    Object.values(this.childrenContainer).forEach((value, index) => {
-      value.classList.add(this.containerClasses[index]);
-      this.container.appendChild(value);
-    });
-    for (const key in this.memberContainer) {
-      this.childrenContainer.div.appendChild(this.memberContainer[key]);
+    for (const key in this.elements) {
+      if (this.elements[key].class)
+        this.elements[key].element.classList.add(this.elements[key].class);
+      this.container.appendChild(this.elements[key].element);
+      if (this.elements[key].nested)
+        this.elements.div.element.appendChild(this.elements[key].element);
     }
   }
   changeElement() {
-    for (const key in this.memberContainer) {
-      this.memberContainer[key].textContent =
-        this.iterableContent[key][this.activeElementIndex];
-    }
-    for (const key in this.childrenContainer) {
-      if (this.iterableContent[key])
-        this.childrenContainer[key].src =
-          this.iterableContent[key][this.activeElementIndex];
+    for (const key in this.elements) {
+      if (this.iterableContent[key]) {
+        if (this.elements[key].image)
+          this.elements[key].element.src =
+            this.iterableContent[key][this.activeElementIndex];
+        if (this.elements[key].nested)
+          this.elements[key].element.textContent =
+            this.iterableContent[key][this.activeElementIndex];
+      }
     }
     this.activeElementIndex++;
-    if (this.activeElementIndex === 2) {
+    if (this.activeElementIndex === this.iterableContent.imgColor.length) {
       this.activeElementIndex = 0;
     }
   }
