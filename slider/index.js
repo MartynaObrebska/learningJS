@@ -1,73 +1,39 @@
-class Baner {
-  constructor(container) {
-    this.container = container;
-    this.activeElementIndex = 0;
-    this.elements = {
-      imgColor: {
-        element: document.createElement("img"),
-        image: true,
-        class: "color",
-      },
-      imgGray: {
-        element: document.createElement("img"),
-        image: true,
-        class: "gray",
-      },
-      div: {
-        element: document.createElement("div"),
-        class: "member",
-      },
-      name: {
-        element: document.createElement("h1"),
-        nested: true,
-      },
-      profession: {
-        element: document.createElement("h2"),
-        nested: true,
-      },
-    };
-    this.iterableContent = {
-      imgColor: ["img/s1.png", "img/s2.png", "img/s3.png"],
-      imgGray: ["img/s1a.png", "img/s2a.png", "img/s3a.png"],
-      name: ["Anna Baugart", "Marek Feliksiak", "Arek Pawłowicz"],
-      profession: [
-        "programistka JS",
-        "UX i UI Designer",
-        "Front-end Developer",
-      ],
-    };
-    this.createBanerContent();
-    this.changeElement();
-    setInterval(() => {
-      this.changeElement();
-    }, 6000);
-  }
-  createBanerContent() {
-    for (const key in this.elements) {
-      if (this.elements[key].class)
-        this.elements[key].element.classList.add(this.elements[key].class);
-      this.container.appendChild(this.elements[key].element);
-      if (this.elements[key].nested)
-        this.elements.div.element.appendChild(this.elements[key].element);
-    }
-  }
-  changeElement() {
-    for (const key in this.elements) {
-      if (this.iterableContent[key]) {
-        if (this.elements[key].image)
-          this.elements[key].element.src =
-            this.iterableContent[key][this.activeElementIndex];
-        if (this.elements[key].nested)
-          this.elements[key].element.textContent =
-            this.iterableContent[key][this.activeElementIndex];
-      }
-    }
-    this.activeElementIndex++;
-    if (this.activeElementIndex === this.iterableContent.imgColor.length) {
-      this.activeElementIndex = 0;
-    }
-  }
-}
-
 const banerContainer = document.querySelector(".team");
-new Baner(banerContainer);
+const numberOfUsers = 5;
+
+// asyn Baner
+
+$.get({
+  url: `https://random-data-api.com/api/v2/users?size=${numberOfUsers}`,
+  dataType: "json",
+  success: function (data) {
+    new Baner(
+      banerContainer,
+      data.map((member) => ({
+        image: member.avatar,
+        name: `${member.first_name} ${member.last_name}`,
+        profession: member.employment.title,
+      }))
+    );
+  },
+});
+
+// static Baner
+
+// new Baner(banerContainer, [
+//   {
+//     image: "img/s1.png",
+//     name: "Anna Baugart",
+//     profession: "programistka JS",
+//   },
+//   {
+//     image: "img/s2.png",
+//     name: "Marek Feliksiak",
+//     profession: "UX i UI Designer",
+//   },
+//   {
+//     image: "img/s3.png",
+//     name: "Arek Pawłowicz",
+//     profession: "Front-end Developer",
+//   },
+// ]);
